@@ -1,7 +1,7 @@
 <?php
         include "./connection.php";
         session_start();
-        if ($_SESSION['name']!= null) {
+        if (@$_SESSION['name']!= null) {
             if ($_SESSION['type']== '0') {
                 header("Location: http://localhost/lab/patient.php");
             }else if($_SESSION['type']== '1'){

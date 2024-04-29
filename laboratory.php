@@ -6,6 +6,9 @@
     <title>Document</title>
 </head>
 <body>
-    hello in your dashboard
+    <form action="" method="post">
+        <input type="text" name="" id="">
+    </form>
+    <a href="./logout.php">logout</a>
 </body>
 </html>

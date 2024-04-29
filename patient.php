@@ -7,5 +7,6 @@
 </head>
 <body>
     hello in your patient dashboard
+    <a href="./logout.php">logout</a>
 </body>
 </html>
