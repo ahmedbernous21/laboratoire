@@ -60,6 +60,10 @@
                 <div class="button">
                     <input type="submit" value="Register" name="sendUser">
                 </div>
+                <div class="signup_link">
+                you already have an ?
+                <a href="http://localhost/lab/login.php">login</a>
+            </div>
             </form>
         </div>
     </div>

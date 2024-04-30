@@ -150,3 +150,6 @@ section {
     font-weight: 700;
     margin: 10px;
 }
+.info p {
+    margin-top: 5px;
+}
