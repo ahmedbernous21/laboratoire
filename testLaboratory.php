@@ -2,16 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/threeforms.css">
-    <title>Patient</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
-<body>
-    <style>
-    .user-details .input-box input:focus, .user-details .input-box input:valid {
-        border: none;
-    }
-     a {
+<style>
+    a {
         color: #212121;
         text-decoration: none;
         font-size: .9rem;
@@ -28,51 +24,55 @@
         border-radius: 5px;
         box-shadow: 0 1px 4px #333;
     }
-    </style>
+</style>
+<body class="test">
     <div class='link'>
-         <a href="./logout.php">logout</a>
+         <a href="/lab/laboratory.php">Ajouter un test</a>
+         <a href="/lab/rendezVous.php">consultez les rendez vous</a>
    </div>
-    <?php
-            session_start();
+     <?php
             include "./connection.php";
-                  if(isset($_POST["reservez"])!=null){
-                        $userName = $_POST['userName'];  
-                        $id = $_POST['id'];  
-                        $test = $_POST['testName'];  
-                        $sql = "INSERT INTO `rendezvous` (`userName`, `testType`, `reservez`) VALUES ('$userName', '$test', '1');";  
-                    $result = $conn->query($sql);
-                    if ($result === TRUE) {
-                        echo "success";
-                    }else {
-                        echo "connection failed";
-                    }
-                }else if(isset($_POST["annulez"])!=null){
-                    $userName = $_POST['userName'];  
-                        $id = $_POST['id'];  
-                        $test = $_POST['testName'];  
-                        $sql = "UPDATE `rendezvous` SET `reservez` = '0' WHERE `userName` = '$userName' AND `testType` = '$test';";  
-                    $result = $conn->query($sql);
-                    if ($result === TRUE) {
-                        echo "success";
-                    }else {
-                        echo "connection failed";
-                    }
-                }
-
-    $sql = "SELECT * FROM `testtype`";
+      if(isset($_POST["sendUpdate"])!=null){
+            $id = $_POST['id'];  
+            $test = $_POST['testName'];  
+            $price = $_POST['price'];  
+            $delay = $_POST['delay'];  
+            $details = $_POST['details'];  
+            $laboratoire = $_POST['laboratoire'];  
+            $sql = "UPDATE `testtype` SET `testName` = '$test', `details` = '$details', `price` = '$price', `delay` = '$delay', `laboratoire` = '$laboratoire' WHERE `testtype`.`id` = '$id';";  
+          $result = $conn->query($sql);
+          if ($result === TRUE) {
+            echo "success";
+          }else {
+            echo "connection failed";
+          }
+      }
+      else if(isset($_POST["sendDelete"])!=null){
+            $id = $_POST['id'];  
+            $test = $_POST['testName'];  
+            $price = $_POST['price'];  
+            $delay = $_POST['delay'];  
+            $details = $_POST['details'];  
+            $laboratoire = $_POST['laboratoire'];  
+            $sql = "DELETE FROM `testtype` WHERE `testtype`.`id` = '$id';";  
+          $result = $conn->query($sql);
+          if ($result === TRUE) {
+            echo "success";
+          }else {
+            echo "connection failed";
+          }
+      }
+            $sql = "SELECT * FROM `testtype`";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
             // output data of each row
             echo "<div class='container test'>";
-            echo "<div class='title'>Test disponible</div><div class='content'>";
+            echo "<div class='title'>Test type</div><div class='content'>";
             while($row = $result->fetch_assoc()) {
                 ?>
             <form action="" method="post">
                 <div class="user-details">
-                <div class="input-box">
-                    <input type="hidden"  name="userName" required value=<?php echo $_SESSION['name']; ?>>
-                </div>
                 <div class="input-box">
                     <input type="hidden"  name="id" required value=<?php echo $row['id']; ?>>
                 </div>
@@ -93,14 +93,24 @@
                   </div>
                  </div>
                  <div class="button">
-                     <input type="submit" value="reservez" name="reservez">
+                     <input type="submit" value="Mise a jour" name="sendUpdate">
                  </div>
                  <div class="button">
-                     <input type="submit" value="annulez" name="annulez">
+                     <input type="submit" value="suprimer" name="sendDelete">
                  </div>
             </form>
             <?php
-            }}
+            }
             ?>
+            </div>
+        </div>
+        <?php
+            } else {
+            echo "0 results";
+            }
+            $conn->close();
+?> 
+        
+    </div>
 </body>
 </html>

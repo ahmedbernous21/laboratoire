@@ -22,7 +22,7 @@ header {
 
 .logo {
     text-decoration: none;
-    color:#ffff;
+    color: #ffff;
     font-weight: 600;
     font-size: 1.8em;
 
@@ -47,10 +47,10 @@ section {
 .main {
     width: 100%;
     min-height: 100vh;
-    display: flex;       
+    display: flex;
     align-items: center;
     background-image: url("../image/bg1.jpg");
-    background-size: cover ; 
+    background-size: cover;
     background-position: center;
     background-attachment: fixed;
 
@@ -71,9 +71,10 @@ section {
 }
 
 .main h2 {
-    color: wheat;
+    color: cyan;
     font-size: 1.2em;
     font-weight: 600;
+    margin: 20px 0;
 }
 
 
@@ -90,6 +91,7 @@ section {
     border-radius: 15px;
     margin-bottom: 40px;
     transition: 0.7s ease;
+    margin-top: 20px;
 }
 
 .main-btn:hover {
@@ -149,4 +151,62 @@ section {
     font-size: 1.2em;
     font-weight: 700;
     margin: 10px;
+}
+
+.info p {
+    margin-top: 5px;
+}
+.offres{
+    background-color: white;
+    max-width: 900px;
+    width: 100%;
+    border-radius: 15px;
+    padding: 15px;
+    margin: auto;
+}
+.off{
+    display: flex;
+}
+.off img{
+    width: 300px;
+    margin: 10px;
+    border-radius: 10px;
+}
+.off p{
+    margin: 10px;
+}
+/* .off button{
+    outline: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    padding: 8px 12px;
+    background-color: #4e9eff;
+    margin: 25px 20px 0 0;
+    color: white;
+    border-radius: 10px;
+}
+.off button:hover{
+    background: black;
+} */
+.input-group.mb-3 {
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    width: 100%;
+}
+input.form-control {
+    border: 1px solid #048ecf;
+    border-right: none;
+    padding: 5px;
+    border-radius: 5px;
+}
+button.btn.btn-primary {
+    padding: 5px;
+    border-left: none;
+    background: #048ecf;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    margin-left: -10px;
 }
