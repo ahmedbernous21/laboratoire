@@ -20,7 +20,7 @@
             
         }
         else{
-            die ("arjq3 man jiti");
+            die ("Error 404");
             }
         header("Location: http://localhost/lab/laboratory.php");
 ?>

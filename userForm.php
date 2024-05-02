@@ -28,9 +28,9 @@
                     $_SESSION['type']   = $type;
                     
                     if ($type=='0') {
-                        // header("Location: http://localhost/lab/patient.php");
+                        header("Location: http://localhost/lab/patient.php");
                     }else if($type=='1'){
-                        // header("Location: http://localhost/lab/laboratoireForm.html");
+                        header("Location: http://localhost/lab/laboratoireForm.html");
                     }
                     } else {
                     echo "Error: " . $sql . "<br>" . $conn->error;

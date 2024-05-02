@@ -6,10 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    a {
+        color: #212121;
+        text-decoration: none;
+        font-size: .9rem;
+    }
+    .link {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        padding:10px;
+        z-index: 1253;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 1px 4px #333;
+    }
+</style>
 <body class="test">
+    <div class='link'>
+         <a href="/lab/laboratory.php">Ajouter un test</a>
+         <a href="/lab/rendezVous.php">consultez les rendez vous</a>
+   </div>
      <?php
             include "./connection.php";
-
+      if(isset($_POST["sendUpdate"])!=null){
+            $id = $_POST['id'];  
+            $test = $_POST['testName'];  
+            $price = $_POST['price'];  
+            $delay = $_POST['delay'];  
+            $details = $_POST['details'];  
+            $laboratoire = $_POST['laboratoire'];  
+            $sql = "UPDATE `testtype` SET `testName` = '$test', `details` = '$details', `price` = '$price', `delay` = '$delay', `laboratoire` = '$laboratoire' WHERE `testtype`.`id` = '$id';";  
+          $result = $conn->query($sql);
+          if ($result === TRUE) {
+            echo "success";
+          }else {
+            echo "connection failed";
+          }
+      }
+      else if(isset($_POST["sendDelete"])!=null){
+            $id = $_POST['id'];  
+            $test = $_POST['testName'];  
+            $price = $_POST['price'];  
+            $delay = $_POST['delay'];  
+            $details = $_POST['details'];  
+            $laboratoire = $_POST['laboratoire'];  
+            $sql = "DELETE FROM `testtype` WHERE `testtype`.`id` = '$id';";  
+          $result = $conn->query($sql);
+          if ($result === TRUE) {
+            echo "success";
+          }else {
+            echo "connection failed";
+          }
+      }
             $sql = "SELECT * FROM `testtype`";
             $result = $conn->query($sql);
 
@@ -41,10 +93,10 @@
                   </div>
                  </div>
                  <div class="button">
-                     <input type="submit" value="update" name="sendUpdate">
+                     <input type="submit" value="Mise a jour" name="sendUpdate">
                  </div>
                  <div class="button">
-                     <input type="submit" value="delete" name="sendDelete">
+                     <input type="submit" value="suprimer" name="sendDelete">
                  </div>
             </form>
             <?php
@@ -61,3 +113,4 @@
         
     </div>
 </body>
+</html>

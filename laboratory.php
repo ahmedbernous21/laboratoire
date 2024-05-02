@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/threeforms.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Laboratoire </title>
 </head>
 <body>
     <?php      
@@ -42,100 +42,36 @@
           $conn->close();
         }
   ?>
-    <a href="./logout.php">logout</a>
+     <a href="./logout.php">Déconnexion</a>
+    <a href="/lab/testLaboratory.php">Afficher les tests</a>
     <div class="container">
-        <div class="title">Test type</div>
+        <div class="title">Type de Test</div>
         <div class="content">
             <form action="" method="post">
                 <div class="user-details">
                     <div class="input-box">
-                        <span class="details">Test Name</span>
-                        <input type="text" placeholder="Enter the test name" name="test" required>
+                        <span class="details">Nom du test</span>
+                        <input type="text" placeholder="Entrez le nom du test" name="test" required>
                     </div>
                     <div class="input-box">
-                        <span class="details">Test dtails</span>
-                        <input type="text" placeholder="Enter test details" name="details" required>
+                        <span class="details">Détails du test</span>
+                        <input type="text" placeholder="Entrez les détails du test" name="details" required>
                     </div>
                     <div class="input-box">
-                        <span class="details">Price</span>
-                        <input type="text" placeholder="Enter test price" name="price" required>
+                        <span class="details">Prix</span>
+                        <input type="text" placeholder="Entrez le prix du test" name="price" required>
                     </div>
                     <div class="input-box">
-                        <span class="details">Delay time</span>
-                        <input type="number" placeholder="Enter delay time of the test" name="delay" required>
-                    </div>
-                    <div class="input-box">
-                        <span class="details">Laboratoire</span>
-                        <input type="text" placeholder="Enter laboratory name" name="laboratoire" required>
-                    </div>
-                </div>
-                <div class="button">
-                    <input type="submit" value="Register" name="sendTest">
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="container">
-        <div class="title">Test type</div>
-        <div class="content">
-            <form action="" method="post">
-                <div class="user-details">
-                    <div class="input-box">
-                        <span class="details">Test Name</span>
-                        <input type="text" placeholder="Enter the test name" name="test" required>
-                    </div>
-                    <div class="input-box">
-                        <span class="details">Test dtails</span>
-                        <input type="text" placeholder="Enter test details" name="details" required>
-                    </div>
-                    <div class="input-box">
-                        <span class="details">Price</span>
-                        <input type="text" placeholder="Enter test price" name="price" required>
-                    </div>
-                    <div class="input-box">
-                        <span class="details">Delay time</span>
-                        <input type="number" placeholder="Enter delay time of the test" name="delay" required>
+                        <span class="details">Délai</span>
+                        <input type="number" placeholder="Entrez le délai du test" name="delay" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Laboratoire</span>
-                        <input type="text" placeholder="Enter laboratory name" name="laboratoire" required>
+                        <input type="text" placeholder="Entrez le nom du laboratoire" name="laboratoire" required>
                     </div>
                 </div>
                 <div class="button">
-                    <input type="submit" value="update" name="sendUpdate">
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="title">Test type</div>
-        <div class="content">
-            <form action="" method="post">
-                <div class="user-details">
-                    <div class="input-box">
-                        <span class="details">Test Name</span>
-                        <input type="text" placeholder="Enter the test name" name="test" required>
-                    </div>
-                    <div class="input-box">
-                        <span class="details">Test dtails</span>
-                        <input type="text" placeholder="Enter test details" name="details" required>
-                    </div>
-                    <div class="input-box">
-                        <span class="details">Price</span>
-                        <input type="text" placeholder="Enter test price" name="price" required>
-                    </div>
-                    <div class="input-box">
-                        <span class="details">Delay time</span>
-                        <input type="number" placeholder="Enter delay time of the test" name="delay" required>
-                    </div>
-                    <div class="input-box">
-                        <span class="details">Laboratoire</span>
-                        <input type="text" placeholder="Enter laboratory name" name="laboratoire" required>
-                    </div>
-                </div>
-                <div class="button">
-                    <input type="submit" value="delete" name="sendDelete">
+                    <input type="submit" value="Enregistrer" name="sendTest">
                 </div>
             </form>
         </div>

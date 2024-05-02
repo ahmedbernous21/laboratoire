@@ -20,32 +20,32 @@
         }
         ?>
     <div class="container">
-        <div class="title">User Registration</div>
+        <div class="title">Inscription utilisateur</div>
         <div class="content">
             <form action="userForm.php" method="post">
                 <div class="user-details">
                     <div class="input-box">
-                        <span class="details">Full Name</span>
-                        <input type="text" placeholder="Enter your name" name="name" required>
+                        <span class="details">Nom complet</span>
+                        <input type="text" placeholder="Entrez votre nom et prenom" name="name" required>
                     </div>
                     <div class="input-box">
                         <span class="details">email</span>
-                        <input type="email" placeholder="Enter your email" name="email" required>
+                        <input type="email" placeholder="Entrez votre email" name="email" required>
                     </div>
                     <div class="input-box">
-                        <span class="details">password</span>
-                        <input type="password" placeholder="Enter your password" name="password" required>
+                        <span class="details">mot de passe</span>
+                        <input type="password" placeholder="Entrez votre mot de passe" name="password" required>
                     </div>
                     <div class="input-box">
-                        <span class="details">Confirm password</span>
-                        <input type="password" placeholder="Confirm your password" name="Cpassword" required>
+                        <span class="details">Confirmez le mot de passe</span>
+                        <input type="password" placeholder="Confirmez votre mot de passe" name="Cpassword" required>
                     </div>
 
                 </div>
                 <div class="gender-details">
                     <input type="radio" name="type" id="dot-1" value="0">
                     <input type="radio" name="type" id="dot-2" value="1">
-                    <span class="gender-title">Type of user</span>
+                    <span class="gender-title">Type d'utilisateur</span>
                     <div class="category">
                         <label for="dot-1">
                             <span class="dot one"></span>
@@ -53,16 +53,16 @@
                         </label>
                         <label for="dot-2">
                             <span class="dot two"></span>
-                            <span class="gender">laboratory</span>
+                            <span class="gender">laboratoire</span>
                         </label>
                     </div>
                 </div>
                 <div class="button">
-                    <input type="submit" value="Register" name="sendUser">
+                    <input type="submit" value="Inscription" name="sendUser">
                 </div>
                 <div class="signup_link">
-                you already have an ?
-                <a href="http://localhost/lab/login.php">login</a>
+                Vous avez déjà un compte ?
+                <a href="http://localhost/lab/login.php">Connexion</a>
             </div>
             </form>
         </div>

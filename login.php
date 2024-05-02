@@ -29,7 +29,7 @@
           if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {
-              $_SESSION['name'] =$row["name"];
+              $_SESSION['name'] =$row["nom"];
               $_SESSION['emailUser'] =$row["email"];
               $_SESSION['password'] =$row["password"];
               $_SESSION['type']   = $row["type"];
@@ -46,22 +46,22 @@
         }
   ?>
     <div class="center">
-        <h1>Login</h1>
+        <h1>Connexion</h1>
         <form method="post">
             <div class="txt_field">
                 <input type="text" required name="user">
                 <span></span>
-                <label>Username</label>
+                <label>Nom Complet</label>
             </div>
             <div class="txt_field">
                 <input type="password" required name="pass">
                 <span></span>
-                <label>Password</label>
+                <label>Mot de passe</label>
             </div>
-            <input type="submit" value="Login" name="login">
+            <input type="submit" value="Connexion" name="login">
             <div class="signup_link">
-                Not a member ?
-                <a href="http://localhost/lab/singup.php">Signup</a>
+                Non membre ?
+                <a href="http://localhost/lab/singup.php">Inscrivez vous</a>
             </div>
         </form>
     </div>
