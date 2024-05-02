@@ -32,7 +32,7 @@
           $details = mysqli_real_escape_string($conn, $details);  
           $laboratoire = mysqli_real_escape_string($conn, $laboratoire);  
 
-          $sql = "INSERT INTO `testtype` (`testName`, `details`, `price`, `delay`, `laboratoire`) VALUES ('$test', '$price', '$delay', '$details', '$test');";  
+          $sql = "INSERT INTO `testtype` (`testName`, `details`, `price`, `delay`, `laboratoire`) VALUES ('$test', '$details', '$delay', '$price', '$laboratoire');";  
           $result = $conn->query($sql);
           if ($result === TRUE) {
           header("Location: http://localhost/lab/testLaboratory.php");

@@ -21,7 +21,7 @@
         padding:10px;
         z-index: 1253;
         background: #fff;
-        border-radius: 5px;
+        border-radius: 5px; 
         box-shadow: 0 1px 4px #333;
     }
 </style>
@@ -77,19 +77,19 @@
                     <input type="hidden"  name="id" required value=<?php echo $row['id']; ?>>
                 </div>
                 <div class="input-box">
-                 <input type="text" value=<?php echo $row['testName']; ?> name="testName" required>
+                 <input type="text" value="<?php echo $row['testName']; ?>" name="testName" required>
                  </div>
                  <div class="input-box">
-                   <input type="text" value=<?php echo $row['details']; ?> name="details" required>
+                   <input type="text" value="<?php echo $row['details']; ?>" name="details" required>
                   </div>
                  <div class="input-box">
-                    <input type="text" value=<?php echo $row['price']; ?> name="price" required>
+                    <input type="text" value="<?php echo $row['price']; ?>" name="price" required>
                  </div>
                  <div class="input-box">
-                   <input type="number" value=<?php echo $row['delay']; ?> name="delay" required>
+                   <input type="number" value="<?php echo $row['delay']; ?>" name="delay" required>
                 </div>
                   <div class="input-box">
-                        <input type="text" value=<?php echo $row['laboratoire']; ?> name="laboratoire" required>
+                        <input type="text" value="<?php echo $row['laboratoire']; ?>" name="laboratoire" required>
                   </div>
                  </div>
                  <div class="button">
