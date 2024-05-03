@@ -8,15 +8,31 @@
 </head>
 <style>
     body.test form {
-        width: 100%;
+        width: 30%;
+        margin: 10px;      
+        width:25%;
+        min-width: 150px;
     }
+    body.test .container {
+        
+        width: 90%;
+        min-width: 250px;
+
+
+    }
+
     .user-details {
         display: flex;
         padding: 10px;
+
     }
     .content form .user-details {
-        margin: 0;
-    }
+        Flex-wrap:wrap;
+    } 
+    .content {
+        display: flex;
+        Flex-wrap:wrap;
+    }  
     a {
         color: #212121;
         text-decoration: none;
@@ -40,6 +56,7 @@
          <a href="/lab/testLaboratory.php">see test</a>
          <a href="./logout.php">logout</a>
    </div>
+    <div>
      <?php
             include "./connection.php";
             $sql = "SELECT * FROM `rendezvous`";
@@ -48,25 +65,28 @@
             if ($result->num_rows > 0) {
             // output data of each row
             echo "<div class='container test'>";
-            echo "<div class='title'>rendez vous</div><div class='content'>";
+            echo "<div class='title'>Les rendez vous</div><div class='content'>";
             while($row = $result->fetch_assoc()) {
                 ?>
+
             <form action="" method="post">
                 <div class="user-details">
-                <div class="input-box">
-                 <input type="text" value=<?php echo $row['userName']; ?> name="testName" required>
-                 </div>
-                 <div class="input-box">
-                   <input type="text" value=<?php echo $row['testType']; ?> name="details" required>
-                  </div>
-                 <div class="input-box">
-                    <input type="text" value=<?php if ($row['reservez']==='0') {echo 'reserver';}else{echo 'annulez';} ?> name="price" required>
-                 </div>
+                    <div class="input-box">
+                    <input type="text" value="<?php echo $row['userName']; ?>" name="testName" required>
+                    </div>
+                    <div class="input-box">
+                    <input type="text" value="<?php echo $row['testType']; ?> " name="details" required>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" value="<?php if ($row['reservez']==='0') {echo 'reserver';}else{echo 'annulez';} ?>" name="price" required>
+                    </div>
+            </div>    
+
             </form>
             <?php
             }}
             ?>
         
-    </div>
+    
 </body>
 </html>
