@@ -59,6 +59,7 @@
     <div>
      <?php
             include "./connection.php";
+            include "./header.php";
             $sql = "SELECT * FROM `rendezvous`";
             $result = $conn->query($sql);
 

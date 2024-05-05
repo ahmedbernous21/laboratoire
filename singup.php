@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/laboratoireForm.css">
+    <link rel="stylesheet" href="css/laboratoireForm.css?v=<?php echo time(); ?>">
 </head>
-
 <body>
     <?php
         session_start();
+        include ('header.php');
         if (@$_SESSION['name']!= null) {
             if ($_SESSION['type']== '0') {
                 header("Location: http://localhost/lab/patient.php");
@@ -19,6 +19,7 @@
             }
         }
         ?>
+<div class="container_ptr">
     <div class="container">
         <div class="title">Inscription utilisateur</div>
         <div class="content">
@@ -67,6 +68,7 @@
             </form>
         </div>
     </div>
+        </div>
 </body>
 
 </html>

@@ -26,6 +26,10 @@
     }
 </style>
 <body class="test">
+  <?php 
+  include "header.php";
+  ?>
+  <div class="container_ptr">
     <div class='link'>
          <a href="/lab/laboratory.php">Ajouter un test</a>
          <a href="/lab/rendezVous.php">consultez les rendez vous</a>
@@ -111,6 +115,7 @@
             $conn->close();
 ?> 
         
+    </div>
     </div>
 </body>
 </html>
