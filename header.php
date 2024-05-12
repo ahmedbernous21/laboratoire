@@ -24,11 +24,11 @@
         echo '<a href="./all_rdv.php">Les rendez-vous</a>';
         echo '<a href="./all_labo.php">Les laboratoires</a>';
       }else{
-        if (isset($_SESSION['type']) == '0'){
-          echo '<a href="./rendezVous.php">Mes rendez-vous</a>';
-        } else {
+        if ($_SESSION['type'] == '1'){
           echo '<a href="./dashboard.php">Dashboard</a>';
           echo '<a href="./profile.php">Profile</a>';
+        } else {
+          echo '<a href="./rendezVous.php">Mes rendez-vous</a>';
         }
     }
       echo '<a href="./logout.php">logout</a>';

@@ -12,7 +12,7 @@
         include ('header.php');
         if (@$_SESSION['name']!= null) {
             if ($_SESSION['type']== '0') {
-                header("Location: http://localhost/lab/patient.php");
+                header("Location: http://localhost/lab/index.php");
             }else if($_SESSION['type']== '1'){
                 header("Location: http://localhost/lab/laboratoireForm.php");
             }

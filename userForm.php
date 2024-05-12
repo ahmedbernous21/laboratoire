@@ -3,7 +3,7 @@
         session_start();
         if (@$_SESSION['name']!= null) {
             if ($_SESSION['type']== '0') {
-                header("Location: http://localhost/lab/patient.php");
+                header("Location: http://localhost/lab/index.php");
             }else if($_SESSION['type']== '1'){
                 header("Location: http://localhost/lab/laboratoireForm.php");
             }
@@ -27,11 +27,11 @@
                     $_SESSION['emailUser'] = $email;
                     $_SESSION['password'] = $password;
                     $_SESSION['type']   = $type;
-                    
+                    $_SESSION['user_id'] = $user_id;
+                    $_SESSION['is_admin'] = '0';
                     if ($type=='0') {
-                        header("Location: http://localhost/lab/patient.php");
+                        header("Location: http://localhost/lab/index.php");
                     }else if($type=='1'){
-                        $_SESSION['user_id'] = $user_id;
                         header("Location: http://localhost/lab/laboratoireForm.php");
                     }
                     } else {
@@ -46,6 +46,6 @@
             }    
         }
         else{
-            die ("arjq3 man jiti");
+            die ("closed session");
             }
 ?>
