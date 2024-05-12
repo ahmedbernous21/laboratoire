@@ -79,7 +79,10 @@
                 <?php
                 if (isset($_GET['search'])) {
                     $filtervalues = $_GET['search'];
-                    $query = "SELECT * FROM laboratoire WHERE CONCAT(emplacement,horaires) LIKE '%$filtervalues%' ";
+                    $query = "SELECT laboratoire.*, users.* , laboratoire.id AS laboID
+                    FROM laboratoire 
+                    INNER JOIN users ON users.id_labo = laboratoire.id 
+                    WHERE CONCAT(laboratoire.emplacement, laboratoire.horaires) LIKE '%$filtervalues%'";
                     $query_run = mysqli_query($conn, $query);
 
                     if (mysqli_num_rows($query_run) > 0) {
@@ -89,14 +92,112 @@
                                 <div class="card" style="border-radius: 15px;">
                                     <div class="card-body text-center">
                                         <div class="mt-3 mb-4">
-                                            <i class="fas fa-layer-group"></i>
+                                            <img src="./image/laboratory.png" class="rounded-circle img-fluid"
+                                                style="width: 100px;" />
+                                        </div>
+                                        <h4 class="mb-2"><?php echo $items['nom']; ?></h4>
+                                        <p class="text-muted mb-4"><?php echo $items['email']; ?><span class="mx-2">|</span> <a
+                                                href="#!"><?php echo $items['phone']; ?></a></p>
+                                        <div class="mb-2 pb-2">
+                                            <p><strong>Emplacement: </strong><span><?php echo $items['emplacement']; ?></span></p>
+                                            <p><strong>Horaires: </strong><span><?php echo $items['horaires']; ?></span></p>
+                                        </div>
+                                        <div class="accordion mt-2 mb-4" id="testAccordion">
+                                            <?php
+                                            $filter_id = $items['laboID'];
+                                            $sql_display = "SELECT * FROM `testtype` WHERE id_labo = '$filter_id' ";
+                                            $result_test = $conn->query($sql_display);
+                                            if ($result_test->num_rows > 0) {
+                                                while ($row = $result_test->fetch_assoc()) {
+
+                                                    ?>
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header" id="heading<?php echo $row['id'] ?>">
+                                                            <button class="accordion-button collapsed" type="button"
+                                                                data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $row['id'] ?>"
+                                                                aria-expanded="false" aria-controls="collapse<?php echo $row['id'] ?>">
+                                                                <?php echo $row['testName'] ?>
+                                                            </button>
+                                                        </h2>
+                                                        <div id="collapse<?php echo $row['id'] ?>" class="accordion-collapse collapse"
+                                                            aria-labelledby="heading<?php echo $row['id'] ?>"
+                                                            data-bs-parent="#testAccordion">
+                                                            <div class="accordion-body">
+                                                                <p><strong>Détails:</strong> <?php echo $row['details'] ?></p>
+                                                                <p><strong>Prix:</strong> <?php echo $row['price'] ?></p>
+                                                                <p><strong>Délai:</strong> <?php echo $row['delay'] ?></p>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <?php
+                                                }
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="d-block">
+                                            <div class="modal fade" id="exampleModal<?php echo $filter_id ?>" tabindex="-1"
+                                                role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Prendre un Randez-vous
+                                                            </h5>
+                                                        </div>
+                                                        <form action="" method="post">
+                                                            <input type="hidden" name="laboId" id="laboId" value="<?php echo $filter_id?>">
+                                                            <div class="modal-body">
+                                                                <div class="input-group mb-4">
+                                                                    <select class="form-select" id="testType" name="testType">
+                                                                        <?php
+                                                                        $sql_modal = "SELECT * FROM `testtype` WHERE id_labo = '$filter_id' ";
+                                                                        $result_modal = $conn->query($sql_modal);
+                                                                        if ($result_modal->num_rows > 0) {
+                                                                            while ($row_test = $result_modal->fetch_assoc()) {
+                                                                                $price = $row_test['testName'];
+                                                                                $test_id = $row_test['id'];
+                                                                                ?>
+                                                                                <option value="<?php echo $test_id;?>" name="test_id"><?php echo $price ?></option>
+                                                                                <?php
+                                                                            }
+                                                                        }
+                                                                        ?>
+                                                                        <option value="other">Un autre test</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="input-group mb-4">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text" id="">Date de test</span>
+                                                                    </div>
+                                                                    <input type="date" class="form-control" id="date" name="date">
+                                                                </div>
+                                                                <div class="input-group mb-4">
+                                                                    <span class="input-group-text" id="">Détails de test</span>
+                                                                    <textarea class="form-control" id="details" rows="3"
+                                                                        name="details"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary mx-4"
+                                                                    data-bs-dismiss="modal">Fermer</button>
+                                                                <button type="submit" class="btn btn-primary" value="Enregistrer"
+                                                                    name="sendRDV">Enregistrer</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="info">
-                                            <h4><?php echo $items['nom']; ?></h4>
-                                            <p><strong>Laboratoire Description:</strong></p>
-                                            <p><strong>Emplacement:</strong><?php echo $items['emplacement']; ?></p>
-                                            <p><strong>Horaires:</strong><?php echo $items['horaires']; ?></p>
-                                            <p><strong>Phone:</strong> <?php echo $items['phone']; ?> </p>
+                                            <?php if (isset($_SESSION['name']) && $_SESSION['is_admin'] == '0') {
+                                                ?>
+                                                <button class="btn btn-info open-rdv" id="sendLaboId" data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal<?php echo $filter_id ?>">Prendre un
+                                                    RDV</button>
+                                                <?php
+                                            } else {
+                                                echo '<div class="btn btn-secondary"><a class="link-dark" href="./login.php">Prendre un RDV</a></div>';
+                                            } ?>
                                         </div>
                                     </div>
                                 </div>
