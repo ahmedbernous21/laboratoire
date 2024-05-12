@@ -141,9 +141,10 @@
                                              data-test-delay="<?php echo $row['delay']; ?>">
                                              <i class="fas fa-edit"></i> Modifier ce test
                                           </button>
+
                                           <button type="button" class="btn btn-danger btn-sm mt-2 delete-test-btn"
                                              data-test-id="<?php echo $row['id']; ?>" name="sendDelete">
-                                             <i class="fas fa-minus"></i> Supprimer ce test
+                                             <i class="fas fa-trash"></i> Supprimer ce test
                                           </button>
 
                                        </div>

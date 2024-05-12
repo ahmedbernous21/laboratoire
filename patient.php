@@ -39,10 +39,10 @@
     include ('header.php');
     include "./connection.php";
     if (isset($_POST["reservez"]) != null) {
-        $userName = $_POST['userName'];
+        $user_id = $_POST['user_id'];
         $id = $_POST['id'];
         $test = $_POST['testName'];
-        $sql = "INSERT INTO `rendezvous` (`userName`, `testType`, `reservez`) VALUES ('$userName', '$test', '1');";
+        $sql = "INSERT INTO `rendezvous` (`user_id`, `testType`, `reservez`) VALUES ('$user_id', '$test', '1');";
         $result = $conn->query($sql);
         if ($result === TRUE) {
             echo "success";
@@ -50,10 +50,10 @@
             echo "connection failed";
         }
     } else if (isset($_POST["annulez"]) != null) {
-        $userName = $_POST['userName'];
+        $user_id = $_POST['user_id'];
         $id = $_POST['id'];
         $test = $_POST['testName'];
-        $sql = "UPDATE `rendezvous` SET `reservez` = '0' WHERE `userName` = '$userName' AND `testType` = '$test';";
+        $sql = "UPDATE `rendezvous` SET `reservez` = '0' WHERE `user_id` = '$user_id' AND `testType` = '$test';";
         $result = $conn->query($sql);
         if ($result === TRUE) {
             echo "success";
@@ -74,7 +74,7 @@
             <form action="" method="post">
                 <div class="user-details">
                     <div class="input-box">
-                        <input type="hidden" name="userName" required value=<?php echo $_SESSION['name']; ?>>
+                        <input type="hidden" name="user_id" required value=<?php echo $_SESSION['name']; ?>>
                     </div>
                     <div class="input-box">
                         <input type="hidden" name="id" required value=<?php echo $row['id']; ?>>

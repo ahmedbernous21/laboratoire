@@ -9,13 +9,12 @@
 </head>
 <body>
     <?php
-        session_start();
         include ('header.php');
         if (@$_SESSION['name']!= null) {
             if ($_SESSION['type']== '0') {
                 header("Location: http://localhost/lab/patient.php");
             }else if($_SESSION['type']== '1'){
-                header("Location: http://localhost/lab/laboratoireForm.html");
+                header("Location: http://localhost/lab/laboratoireForm.php");
             }
         }
         ?>
@@ -26,15 +25,15 @@
             <form action="userForm.php" method="post">
                 <div class="user-details">
                     <div class="input-box">
-                        <span class="details">Nom complet</span>
-                        <input type="text" placeholder="Entrez votre nom et prenom" name="name" required>
+                        <span class="details">Nom complet / Nom du laboratoire</span>
+                        <input type="text" placeholder="Entrez le nom" name="name" required>
                     </div>
                     <div class="input-box">
-                        <span class="details">email</span>
+                        <span class="details">Email</span>
                         <input type="email" placeholder="Entrez votre email" name="email" required>
                     </div>
                     <div class="input-box">
-                        <span class="details">mot de passe</span>
+                        <span class="details">Mot de passe</span>
                         <input type="password" placeholder="Entrez votre mot de passe" name="password" required>
                     </div>
                     <div class="input-box">

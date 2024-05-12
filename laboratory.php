@@ -8,7 +8,6 @@
 </head>
 <body>
     <?php      
-       session_start();
       include('header.php');
       include('connection.php');  
       if(isset($_POST["sendTest"])!=null){
@@ -16,24 +15,20 @@
       $price = $_POST['price'];  
       $delay = $_POST['delay'];  
       $details = $_POST['details'];  
-      $laboratoire = $_POST['laboratoire'];  
-      
+      $currentLabId = $_SESSION['users_id_labo'];
           //to prevent from mysqli injection  
-          $username = stripcslashes($username);  
           $password = stripcslashes($password);  
           $test = stripcslashes($test);  
           $price = stripcslashes($price);  
           $delay = stripcslashes($delay);  
           $details = stripcslashes($details);  
           
-          $username = mysqli_real_escape_string($conn, $username);  
           $test = mysqli_real_escape_string($conn, $test);  
           $price = mysqli_real_escape_string($conn, $price);  
           $delay = mysqli_real_escape_string($conn, $delay);  
           $details = mysqli_real_escape_string($conn, $details);  
-          $laboratoire = mysqli_real_escape_string($conn, $laboratoire);  
 
-          $sql = "INSERT INTO `testtype` (`testName`, `details`, `price`, `delay`, `laboratoire`) VALUES ('$test', '$details', '$delay', '$price', '$laboratoire');";  
+          $sql = "INSERT INTO `testtype` (`id_labo`,`testName`, `details`, `price`, `delay`) VALUES ('$currentLabId','$test', '$details', '$delay', '$price');";  
           $result = $conn->query($sql);
           if ($result === TRUE) {
           header("Location: http://localhost/lab/testLaboratory.php");
@@ -65,10 +60,6 @@
                     <div class="input-box">
                         <span class="details">Délai</span>
                         <input type="number" placeholder="Entrez le délai du test" name="delay" required>
-                    </div>
-                    <div class="input-box">
-                        <span class="details">Laboratoire</span>
-                        <input type="text" placeholder="Entrez le nom du laboratoire" name="laboratoire" required>
                     </div>
                 </div>
                 <div class="button">

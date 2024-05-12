@@ -5,7 +5,7 @@
             if ($_SESSION['type']== '0') {
                 header("Location: http://localhost/lab/patient.php");
             }else if($_SESSION['type']== '1'){
-                header("Location: http://localhost/lab/laboratoireForm.html");
+                header("Location: http://localhost/lab/laboratoireForm.php");
             }
         }
         isset($_POST["sendUser"]);
@@ -21,6 +21,7 @@
                     $sql = "INSERT INTO `users` (`nom`, `email`, `password`, `type`) 
                     VALUES ('$name', '$email', '$password','$type');";
                     if ($conn->query($sql) === TRUE) {
+                    $user_id = $conn->insert_id;
                     echo "New record created successfully";
                     $_SESSION['name'] = $name;
                     $_SESSION['emailUser'] = $email;
@@ -30,17 +31,18 @@
                     if ($type=='0') {
                         header("Location: http://localhost/lab/patient.php");
                     }else if($type=='1'){
-                        header("Location: http://localhost/lab/laboratoireForm.html");
+                        $_SESSION['user_id'] = $user_id;
+                        header("Location: http://localhost/lab/laboratoireForm.php");
                     }
                     } else {
                     echo "Error: " . $sql . "<br>" . $conn->error;
                     }
                     $conn->close();
                 }else{
-                    die('confirme your name and username');
+                    die('confirm your name and username');
                 }
             }else{
-                die('confirme your password');
+                die('confirm your password');
             }    
         }
         else{

@@ -7,7 +7,7 @@
             $number = $_POST['number'];
             $horraire = $_POST['horraire'];
               
-            $sql = "INSERT INTO `laboratoire` (`nom`, `emplacement`, `email`, `numeroDeTelephone`, `horaires`) 
+            $sql = "INSERT INTO `laboratoire` (`emplacement`, `phone`, `horaires`) 
             VALUES ('$name', '$emplacement', '$email', '$number','$horraire');";
 
             if ($conn->query($sql) === TRUE) {

@@ -14,6 +14,7 @@
     <?php
     include ('header.php');
     include ('connection.php');
+    session_start();
     $loggedIn = false;
     if (isset($_POST["login"]) != null) {
         $username = $_POST['user'];
@@ -24,20 +25,23 @@
         $username = mysqli_real_escape_string($conn, $username);
         $password = mysqli_real_escape_string($conn, $password);
 
-        $sql = "select *from users where nom = '$username' and password = '$password'";
+        $sql = "SELECT  * FROM users WHERE nom = '$username' and password = '$password'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             $loggedIn = true;
             while ($row = $result->fetch_assoc()) {
+                $_SESSION['user_id'] = $row["id"];
                 $_SESSION['name'] = $row["nom"];
                 $_SESSION['emailUser'] = $row["email"];
                 $_SESSION['password'] = $row["password"];
                 $_SESSION['type'] = $row["type"];
+                $_SESSION['is_admin'] = $row["is_admin"];
+
                 if ($row["type"] == '0') {
-                    header("Location: http://localhost/lab/patient.php");
+                    header("Location: http://localhost/lab/index.php");
                 } else if ($row["type"] == '1') {
-                    header("Location: http://localhost/lab/laboratory.php");
+                    header("Location: http://localhost/lab/profile.php");
                 }
             }
         } else {

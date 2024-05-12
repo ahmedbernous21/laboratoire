@@ -15,21 +15,25 @@
     $is_home_page = ($current_page === $home_page);
     if (isset($_SESSION['name'])) {
       if ($is_home_page) {
-         echo '<a href="#services">Laboratories</a>';
-         echo '<a href="./rendezVous.php">Dashboard</a>';
-     } else {
-         echo '<a href="./">Laboratories</a>';
-         echo '<a href="./">Mes tests</a>';
+        echo '<a href="#services">Laboratories</a>';
+      } else {
+        echo '<a href="./">Laboratories</a>';
      }
+      if($_SESSION['is_admin'] == '1')
+      {
+        echo '<a href="./all_rdv.php">Les rendez-vous</a>';
+        echo '<a href="./all_labo.php">Les laboratoires</a>';
+      }else{
+        if (isset($_SESSION['type']) == '0'){
+          echo '<a href="./rendezVous.php">Mes rendez-vous</a>';
+        } else {
+          echo '<a href="./dashboard.php">Dashboard</a>';
+          echo '<a href="./profile.php">Profile</a>';
+        }
+    }
       echo '<a href="./logout.php">logout</a>';
     } else {
-      if ($is_home_page) {
          echo '<a href="#services">Laboratories</a>';
-         echo '<a href="./randezVous.php">Dashboard</a>';
-     } else {
-         echo '<a href="./">Laboratories</a>';
-         echo '<a href="./">Dashboard</a>';
-     }   
         echo '<a href="./login.php">login</a>';
     }
     ?>

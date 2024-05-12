@@ -130,14 +130,7 @@ section {
     border-radius: 10px;
     padding: 25px;
     margin: 15px;
-    transition: 0.7s ease;
 }
-
-.card:hover {
-    transform: scale(1.1);
-    transition: 0.7s ease;
-}
-
 .icon {
     color: #048ECF;
     font-size: 5em;

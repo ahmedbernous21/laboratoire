@@ -38,7 +38,7 @@
             include "./connection.php";
       if(isset($_POST["sendUpdate"])!=null){
             $id = $_POST['id'];  
-            $test = $_POST['testName'];  
+            $test = $_POST['testName'];
             $price = $_POST['price'];  
             $delay = $_POST['delay'];  
             $details = $_POST['details'];  

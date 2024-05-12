@@ -59,8 +59,7 @@
             <div class="container mt-5">
 
                 <?php
-                $userId = $_SESSION['user_id'];
-                $sql = "SELECT * FROM `randezvous` WHERE `user_id` = $userId";
+                $sql = "SELECT * FROM `randezvous`";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -184,15 +183,15 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="accordion" id="resultAccordion">
                                             <div class="accordion-item">
-                                                <h2 class="accordion-header" id="resultHeading">
+                                                <h2 class="accordion-header" id="resultHeading<?php echo $row['id'] ?>">
                                                     <button class="accordion-button collapsed bg-primary" type="button"
-                                                        data-bs-toggle="collapse" data-bs-target="#resultCollapse"
-                                                        aria-expanded="false" aria-controls="resultCollapse">
+                                                        data-bs-toggle="collapse" data-bs-target="#resultCollapse<?php echo $row['id'] ?>"
+                                                        aria-expanded="false" aria-controls="resultCollapse<?php echo $row['id'] ?>">
                                                         View result
                                                     </button>
                                                 </h2>
-                                                <div id="resultCollapse" class="accordion-collapse collapse"
-                                                    aria-labelledby="resultHeading" data-bs-parent="#resultAccordion">
+                                                <div id="resultCollapse<?php echo $row['id'] ?>" class="accordion-collapse collapse"
+                                                    aria-labelledby="resultHeading<?php echo $row['id'] ?>" data-bs-parent="#resultAccordion">
                                                     <div class="accordion-body">
                                                         <p><?php echo $row_result['resultat'];?></p>
                                                     </div>
