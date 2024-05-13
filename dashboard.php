@@ -60,7 +60,7 @@
 
             <?php
             $userId = $_SESSION['user_id'];
-            $sql = "SELECT r.id AS randezvous_id,r.*, u.* 
+            $sql = "SELECT r.id AS rendezvousid,r.*, u.* 
                 FROM randezvous r
                 INNER JOIN users u ON r.labo_id = u.id_labo
                 WHERE u.id = $userId";
@@ -162,7 +162,7 @@
                         if($row['status'] == 'pending'){
                            ?>
                         <button class="btn btn-primary send-result-btn" type="button" data-bs-toggle="modal"
-                           data-bs-target="#exampleModal" data-rdv-id="<?php echo $row['randezvous_id']; ?>"
+                           data-bs-target="#exampleModal" data-rdv-id="<?php echo $row['rendezvousid']; ?>"
                            data-rdv-date="<?php echo $row['date']; ?>"
                            data-rdv-details="<?php echo $row['description']; ?>"><i class="fas fa-poll-h"></i>
                            Envoyer les résultats</button>

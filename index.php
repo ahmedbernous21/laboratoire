@@ -29,8 +29,8 @@
             $sql_rdv = "INSERT INTO `randezvous` (`user_id`,`labo_id`, `test_type`,`status`,`date`, `description`) VALUES ('$userId', '$laboId', '$testType','$status', '$date','$details')";
             $result_rdv = $conn->query($sql_rdv);
     
-            if ($result_rdv == TRUE) {
-                header("Location: " . $_SERVER['REQUEST_URI']);
+            if ($result_rdv == TRUE && $_SESSION['type'] == '0') {
+                header("Location: rendezVous.php" );
             } else {
                 echo "Une erreur s'est produite lors de l'enregistrement du rendez-vous.";
             }
@@ -55,7 +55,7 @@
                 ?>
              <a href="#services" class="main-btn">Prendre un Rendez-vous</a>
              <?php
-                 }else{ echo '<a href="/lab/singup.php" class="main-btn">Inscrivez-vous</a>'; }
+                 }else{ echo '<a href="/lab/signup.php" class="main-btn">Inscrivez-vous</a>'; }
 
              ?>
         </div>
@@ -141,7 +141,7 @@
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Prendre un Randez-vous
+                                                            <h5 class="modal-title" id="exampleModalLabel">Prendre un Rendez-vous
                                                             </h5>
                                                         </div>
                                                         <form action="" method="post">
@@ -269,7 +269,7 @@
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Prendre un Randez-vous
+                                                            <h5 class="modal-title" id="exampleModalLabel">Prendre un Rendez-vous
                                                             </h5>
                                                         </div>
                                                         <form action="" method="post">

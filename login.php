@@ -37,7 +37,6 @@
                 $_SESSION['password'] = $row["password"];
                 $_SESSION['type'] = $row["type"];
                 $_SESSION['is_admin'] = $row["is_admin"];
-
                 if ($row["type"] == '0') {
                     header("Location: http://localhost/lab/index.php");
                 } else if ($row["type"] == '1') {
@@ -66,7 +65,7 @@
             <input type="submit" value="Connexion" name="login">
             <div class="signup_link">
                 Non membre ?
-                <a href="http://localhost/lab/singup.php">Inscrivez vous</a>
+                <a href="http://localhost/lab/signup.php">Inscrivez vous</a>
             </div>
         </form>
     </div>
