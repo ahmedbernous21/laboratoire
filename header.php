@@ -14,16 +14,16 @@
     $home_page = '/lab/';
     $is_home_page = ($current_page === $home_page);
     if (isset($_SESSION['name'])) {
-      if ($is_home_page) {
-        echo '<a href="#services">Laboratories</a>';
-      } else {
-        echo '<a href="./">Laboratories</a>';
-     }
       if($_SESSION['is_admin'] == '1')
       {
         echo '<a href="./all_rdv.php">Les rendez-vous</a>';
         echo '<a href="./all_labo.php">Les laboratoires</a>';
       }else{
+      if ($is_home_page) {
+        echo '<a href="#services">Laboratories</a>';
+      } else {
+        echo '<a href="./">Laboratories</a>';
+     }
         if ($_SESSION['type'] == '1'){
           echo '<a href="./dashboard.php">Dashboard</a>';
           echo '<a href="./profile.php">Profile</a>';

@@ -76,14 +76,14 @@
                               <input type="hidden" name="laboid" value="<?php echo $laboId ?>">
                               <?php if (isset($row['recu']) && !isset($row['payment_day'])) { ?>
                                     <p><strong>paiement:
-                                       </strong><?php echo '<img src="data:image/jpeg;base64,' . base64_encode($row['recu']) . '"/>'; ?>
-                                       <button class="btn btn-success" name="addSubs">Validate</button>
+                                       </strong><?php echo '<img class="w-100" src="data:image/jpeg;base64,' . base64_encode($row['recu']) . '"/>'; ?>
+                                       <button class="btn btn-success my-2" name="addSubs">Validate</button>
                                  <?php
                               }
                               if (isset($row['payment_day'])) {
                                  ?>
                                  <p><strong>paiement:
-                                    </strong><?php echo '<img src="data:image/jpeg;base64,' . base64_encode($row['recu']) . '"/>'; ?>
+                                    </strong><?php echo '<img class="w-100" src="data:image/jpeg;base64,' . base64_encode($row['recu']) . '"/>'; ?>
                                     <button class="btn btn-danger my-2" name="removeSubs">Annuler abonnement</button>
                                  <p><strong>date de validation: </strong><span><?php echo $row['payment_day']; ?></span></p>
                                  <?php

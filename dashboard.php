@@ -86,7 +86,7 @@
                      } else {
                         echo "Error deleting appointment: " . $conn->error;
                      }
-                  
+               
                }
                while ($row = $result->fetch_assoc()) {
                   $labo_id = $row['labo_id'];
