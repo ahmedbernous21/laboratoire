@@ -14,7 +14,6 @@
     <?php
     include ('header.php');
     include ('connection.php');
-    session_start();
     $loggedIn = false;
     if (isset($_POST["login"]) != null) {
         $username = $_POST['user'];

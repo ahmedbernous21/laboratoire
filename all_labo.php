@@ -17,7 +17,6 @@
    <?php
    include ('header.php');
    include "./connection.php";
-   session_start();
    $userId = $_SESSION['user_id'];
    if (isset($_POST['addSubs'])) {
       $labo_id = $_POST['laboid'];
