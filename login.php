@@ -37,10 +37,14 @@
                 $_SESSION['password'] = $row["password"];
                 $_SESSION['type'] = $row["type"];
                 $_SESSION['is_admin'] = $row["is_admin"];
+                if($row['is_admin'] == '0'){
                 if ($row["type"] == '0') {
                     header("Location: http://localhost/lab/index.php");
                 } else if ($row["type"] == '1') {
                     header("Location: http://localhost/lab/profile.php");
+                }
+                }else{
+                    header("Location: http://localhost/lab/all_labo.php");
                 }
             }
         } else {

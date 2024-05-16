@@ -43,8 +43,8 @@
 
                 </div>
                 <div class="gender-details">
-                    <input type="radio" name="type" id="dot-1" value="0">
-                    <input type="radio" name="type" id="dot-2" value="1">
+                    <input type="radio" name="type" id="dot-1" value="0" required>
+                    <input type="radio" name="type" id="dot-2" value="1" required>
                     <span class="gender-title">Type d'utilisateur</span>
                     <div class="category">
                         <label for="dot-1">

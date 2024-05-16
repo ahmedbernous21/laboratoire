@@ -17,8 +17,9 @@
     <?php
     include ('header.php');
     include "./connection.php";
-    session_start();
-    $userId = $_SESSION['user_id'];
+    if (isset($_SESSION['user_id'])) {
+        $userId = $_SESSION['user_id'];
+    }
     if (isset($_POST['sendRDV'])) {
         if (isset($_POST['laboId'])) {
             $laboId = $_POST['laboId'];
@@ -28,9 +29,9 @@
             $details = $_POST['details'];
             $sql_rdv = "INSERT INTO `randezvous` (`user_id`,`labo_id`, `test_type`,`status`,`date`, `description`) VALUES ('$userId', '$laboId', '$testType','$status', '$date','$details')";
             $result_rdv = $conn->query($sql_rdv);
-    
+
             if ($result_rdv == TRUE && $_SESSION['type'] == '0') {
-                header("Location: rendezVous.php" );
+                header("Location: rendezVous.php");
             } else {
                 echo "Une erreur s'est produite lors de l'enregistrement du rendez-vous.";
             }
@@ -50,14 +51,16 @@
             <h2>Trouvez rapidement des laboratoires médicaux, <br>
                 prenez rendez-vous et consultez vos résultats,<br>
                 le tout sur une plateforme intuitive.</h2>
-                <?php
-                 if (isset($_SESSION['name'])){
+            <?php
+            if (isset($_SESSION['name'])) {
                 ?>
-             <a href="#services" class="main-btn">Prendre un Rendez-vous</a>
-             <?php
-                 }else{ echo '<a href="/lab/signup.php" class="main-btn">Inscrivez-vous</a>'; }
+                <a href="#services" class="main-btn">Prendre un Rendez-vous</a>
+                <?php
+            } else {
+                echo '<a href="/lab/signup.php" class="main-btn">Inscrivez-vous</a>';
+            }
 
-             ?>
+            ?>
         </div>
 
     </section>
@@ -145,7 +148,8 @@
                                                             </h5>
                                                         </div>
                                                         <form action="" method="post">
-                                                            <input type="hidden" name="laboId" id="laboId" value="<?php echo $filter_id?>">
+                                                            <input type="hidden" name="laboId" id="laboId"
+                                                                value="<?php echo $filter_id ?>">
                                                             <div class="modal-body">
                                                                 <div class="input-group mb-4">
                                                                     <select class="form-select" id="testType" name="testType">
@@ -157,7 +161,8 @@
                                                                                 $price = $row_test['testName'];
                                                                                 $test_id = $row_test['id'];
                                                                                 ?>
-                                                                                <option value="<?php echo $test_id;?>" name="test_id"><?php echo $price ?></option>
+                                                                                <option value="<?php echo $test_id; ?>" name="test_id">
+                                                                                    <?php echo $price ?></option>
                                                                                 <?php
                                                                             }
                                                                         }
@@ -273,7 +278,8 @@
                                                             </h5>
                                                         </div>
                                                         <form action="" method="post">
-                                                            <input type="hidden" name="laboId" id="laboId" value="<?php echo $laboId?>">
+                                                            <input type="hidden" name="laboId" id="laboId"
+                                                                value="<?php echo $laboId ?>">
                                                             <div class="modal-body">
                                                                 <div class="input-group mb-4">
                                                                     <select class="form-select" id="testType" name="testType">
@@ -285,7 +291,8 @@
                                                                                 $price = $row_test['testName'];
                                                                                 $test_id = $row_test['id'];
                                                                                 ?>
-                                                                                <option value="<?php echo $test_id;?>" name="test_id"><?php echo $price ?></option>
+                                                                                <option value="<?php echo $test_id; ?>" name="test_id">
+                                                                                    <?php echo $price ?></option>
                                                                                 <?php
                                                                             }
                                                                         }
