@@ -183,9 +183,9 @@
                   </div>
                   <div class="input-group mb-4">
                      <div class="input-group-prepend">
-                        <span class="input-group-text" id="">Prix de test</span>
+                        <span class="input-group-text" id="">Prix de test (DA)</span>
                      </div>
-                     <input type="text" class="form-control" id="testPrice" name="price">
+                     <input type="number" class="form-control" id="testPrice" name="price">
                   </div>
                   <div class="input-group mb-4">
                      <span class="input-group-text" id="">Détails de test</span>
