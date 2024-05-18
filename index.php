@@ -85,7 +85,7 @@
                     $query = "SELECT laboratoire.*, users.* , laboratoire.id AS laboID
                     FROM laboratoire 
                     INNER JOIN users ON users.id_labo = laboratoire.id 
-                    WHERE CONCAT(laboratoire.emplacement, laboratoire.horaires) LIKE '%$filtervalues%'";
+                    WHERE CONCAT(laboratoire.emplacement, laboratoire.horaires) LIKE '%$filtervalues%' AND `is_paid` = '1'";
                     $query_run = mysqli_query($conn, $query);
 
                     if (mysqli_num_rows($query_run) > 0) {
@@ -211,7 +211,7 @@
                         }
                     }
                 } else {
-                    $sql = "SELECT * FROM `laboratoire`";
+                    $sql = "SELECT * FROM `laboratoire` WHERE `is_paid` = '0'";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         // output data of each row
@@ -282,23 +282,23 @@
                                                                 value="<?php echo $laboId ?>">
                                                             <div class="modal-body">
                                                                 <div class="input-group mb-4">
-                                                                    <select class="form-select" id="testType" name="testType">
-                                                                        <?php
-                                                                        $sql_modal = "SELECT * FROM `testtype` WHERE id_labo = '$laboId' ";
-                                                                        $result_modal = $conn->query($sql_modal);
-                                                                        if ($result_modal->num_rows > 0) {
-                                                                            while ($row_test = $result_modal->fetch_assoc()) {
-                                                                                $price = $row_test['testName'];
-                                                                                $test_id = $row_test['id'];
-                                                                                ?>
-                                                                                <option value="<?php echo $test_id; ?>" name="test_id">
-                                                                                    <?php echo $price ?></option>
-                                                                                <?php
-                                                                            }
+                                                                <select class="form-select" id="testType" name="testType[]" data-mdb-select-init multiple>
+                                                                    <?php
+                                                                    $sql_modal = "SELECT * FROM `testtype` WHERE id_labo = '$laboId' ";
+                                                                    $result_modal = $conn->query($sql_modal);
+                                                                    if ($result_modal->num_rows > 0) {
+                                                                        while ($row_test = $result_modal->fetch_assoc()) {
+                                                                            $price = $row_test['testName'];
+                                                                            $test_id = $row_test['id'];
+                                                                    ?>
+                                                                            <option value="<?php echo $test_id; ?>">
+                                                                                <?php echo $price ?>
+                                                                            </option>
+                                                                    <?php
                                                                         }
-                                                                        ?>
-                                                                        <option value="other">Un autre test</option>
-                                                                    </select>
+                                                                    }
+                                                                    ?>
+                                                                </select>       
                                                                 </div>
                                                                 <div class="input-group mb-4">
                                                                     <div class="input-group-prepend">
