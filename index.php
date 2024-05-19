@@ -23,14 +23,21 @@
     if (isset($_POST['sendRDV'])) {
         if (isset($_POST['laboId'])) {
             $laboId = $_POST['laboId'];
-            $testType = $_POST['testType'];
-            $status = 'pending';
+            $selectedTests = $_POST['testType'];
+            $status = 'unconfirmed';
             $date = $_POST['date'];
             $details = $_POST['details'];
-            $sql_rdv = "INSERT INTO `randezvous` (`user_id`,`labo_id`, `test_type`,`status`,`date`, `description`) VALUES ('$userId', '$laboId', '$testType','$status', '$date','$details')";
+            $sql_rdv = "INSERT INTO `randezvous` (`user_id`,`labo_id`,`status`,`date`, `description`) VALUES ('$userId', '$laboId','$status', '$date','$details')";
             $result_rdv = $conn->query($sql_rdv);
 
             if ($result_rdv == TRUE && $_SESSION['type'] == '0') {
+                $rdvId = $conn->insert_id;
+                foreach($selectedTests as $test_id) {
+                    $sql_insert_test = "INSERT INTO `rdv_tests` (`rdv_id`, `test_id`) 
+                                        VALUES ('$rdvId', '$test_id')";
+                    // Execute the SQL query
+                    $conn->query($sql_insert_test);
+                }
                 header("Location: rendezVous.php");
             } else {
                 echo "Une erreur s'est produite lors de l'enregistrement du rendez-vous.";
