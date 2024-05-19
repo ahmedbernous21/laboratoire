@@ -25,6 +25,7 @@
          $name = $row['nom'];
          $email = $row['email'];
          $labo_id = $row['id_labo'];
+
          $labo_query = "SELECT * FROM laboratoire WHERE id = '$labo_id'";
          $labo_result = $conn->query($labo_query);
          if (mysqli_num_rows($labo_result) == 1) {
@@ -32,9 +33,38 @@
             $emplacement = $labo_row['emplacement'];
             $phone = $labo_row['phone'];
             $horaires = $labo_row['horaires'];
+            $tarifs = $labo_row['tarif'];
          } else {
             $labo_name = "Unknown Lab";
          }
+          $sql_tarif = 
+            "UPDATE laboratoire l 
+            JOIN (
+                SELECT 
+                    r.labo_id, 
+                    SUM(CASE 
+                        WHEN r.is_domicile = 0 THEN t.price * 0.08 
+                        ELSE t.price * 0.1 
+                    END) AS total_amount_to_pay
+                FROM 
+                    randezvous r
+                JOIN 
+                    rdv_tests rt ON r.id = rt.rdv_id
+                JOIN 
+                    testtype t ON rt.test_id = t.id
+                WHERE 
+                    r.labo_id = $labo_id
+                    AND r.status = 'finished'
+                GROUP BY 
+                    r.labo_id
+            ) AS results ON l.id = results.labo_id
+            SET l.tarif = results.total_amount_to_pay;
+        ";
+        if ($conn->query($sql_tarif) === TRUE) {
+         echo "Tarif updated successfully.";
+      } else {
+            echo "Error updating tarif: " . $conn->error;
+      }
       } else {
          header("Location: login.php");
          exit;
@@ -154,7 +184,8 @@
                            }
                            ?>
                         </div>
-                        
+                        <p class="mt-2"><strong>Tarifs: </strong> <span><?php echo $tarifs ?> DA</span></p>
+
                      </div>
 
 
