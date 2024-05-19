@@ -27,17 +27,21 @@
             $status = 'unconfirmed';
             $date = $_POST['date'];
             $details = $_POST['details'];
-            $sql_rdv = "INSERT INTO `randezvous` (`user_id`,`labo_id`,`status`,`date`, `description`) VALUES ('$userId', '$laboId','$status', '$date','$details')";
+            $domicile = $_POST['domicile'];
+            $sql_rdv = "INSERT INTO `randezvous` (`user_id`,`labo_id`,`status`,`date`, `description`, `is_domicile`) VALUES ('$userId', '$laboId', '$status', '$date', '$details', '$domicile')";
             $result_rdv = $conn->query($sql_rdv);
 
-            if ($result_rdv == TRUE && $_SESSION['type'] == '0') {
+            if ($result_rdv == TRUE && $_SESSION['http://localhost/lab/type'] == '0') {
                 $rdvId = $conn->insert_id;
                 foreach($selectedTests as $test_id) {
+                    if($test_id !="other"){
                     $sql_insert_test = "INSERT INTO `rdv_tests` (`rdv_id`, `test_id`) 
                                         VALUES ('$rdvId', '$test_id')";
                     // Execute the SQL query
                     $conn->query($sql_insert_test);
+                    }
                 }
+            
                 header("Location: rendezVous.php");
             } else {
                 echo "Une erreur s'est produite lors de l'enregistrement du rendez-vous.";
@@ -188,6 +192,17 @@
                                                                     <textarea class="form-control" id="details" rows="3"
                                                                         name="details"></textarea>
                                                                 </div>
+                                                                <div class="input-group mb-4">
+                                                                    <span class="input-group-text">Résultat à domicile</span>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="domicile" id="domicileYes" value="1">
+                                                                        <label class="form-check-label" for="domicileYes">Oui</label>
+                                                                    </div>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="domicile" id="domicileNo" value="O" checked>
+                                                                        <label class="form-check-label" for="domicileNo">Non</label>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary mx-4"
@@ -305,6 +320,9 @@
                                                                         }
                                                                     }
                                                                     ?>
+                                                                       <option value="other">
+                                                                                <p>Un autre test</p>
+                                                                        </option>
                                                                 </select>       
                                                                 </div>
                                                                 <div class="input-group mb-4">
@@ -317,6 +335,17 @@
                                                                     <span class="input-group-text" id="">Détails de test</span>
                                                                     <textarea class="form-control" id="details" rows="3"
                                                                         name="details"></textarea>
+                                                                </div>
+                                                                <div class="input-group mb-4">
+                                                                    <span class="input-group-text">Résultat à domicile</span>
+                                                                    <div class="form-check ms-4">
+                                                                        <input class="form-check-input" type="radio" name="domicile" id="domicileYes" value="1">
+                                                                        <label class="form-check-label" for="domicileYes">Oui</label>
+                                                                    </div>
+                                                                    <div class="form-check ms-4">
+                                                                        <input class="form-check-input" type="radio" name="domicile" id="domicileNo" value="0" checked>
+                                                                        <label class="form-check-label" for="domicileNo">Non</label>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
