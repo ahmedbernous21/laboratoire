@@ -59,12 +59,12 @@
          <?php
          $userId = $_SESSION['user_id'];
          $sql = "SELECT r.id AS rendezvousid, r.*, GROUP_CONCAT(t.testName SEPARATOR ', ') AS testNames
-               FROM randezvous r
-               LEFT JOIN rdv_tests rt ON r.id = rt.rdv_id
-               LEFT JOIN testtype t ON rt.test_id = t.id
-               WHERE r.labo_id = (SELECT id_labo FROM users WHERE id = $userId)
-               GROUP BY r.id";
- 
+            FROM randezvous r
+            LEFT JOIN rdv_tests rt ON r.id = rt.rdv_id
+            LEFT JOIN testtype t ON rt.test_id = t.id
+            WHERE r.labo_id = (SELECT id_labo FROM users WHERE id = $userId)
+            GROUP BY r.id";
+
          $result = $conn->query($sql);
 
          if (isset($_POST['confirm'])) {
@@ -116,7 +116,9 @@
                ?>
                <div class="card rendezvous border border-primary mt-4 w-100">
                   <div class="details-section">
-                     <p><i class="fas fa-vial me-2"></i><strong>Nom du test:</strong> <?php echo $row['testNames']; ?></p>
+                     <p><i class="fas fa-vial me-2"></i><strong>Nom du test:</strong>
+                        <?php echo !empty($row['testNames']) ? $row['testNames'] : 'un autre test'; ?>
+                     </p>
                      <p><i class="fas fa-user me-2"></i><strong>Nom du patient:</strong> <?php echo $patient_name; ?></p>
                      <p><i class="fas fa-envelope me-2"></i><strong>Email du patient:</strong> <?php echo $patient_email; ?>
                      </p>
