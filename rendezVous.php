@@ -71,9 +71,9 @@
                     $rdvId = $_POST['rdvId'];
                     $date = $_POST['date'];
                     $details = $_POST['details'];
+                    $domicile = $_POST['domicile'];
 
-
-                    $update_sql = "UPDATE randezvous SET `date` = '$date', `description` = '$details' WHERE id = '$rdvId'";
+                    $update_sql = "UPDATE randezvous SET `date` = '$date', `description` = '$details',`is_domicile` = '$domicile' WHERE id = '$rdvId'";
                     if ($conn->query($update_sql) === TRUE) {
                         header("Location: " . $_SERVER['REQUEST_URI']);
                     } else {
@@ -121,6 +121,8 @@
                         <div class="date-section">
                             <p><i class="fas fa-calendar-alt me-2"></i><strong>La date du Rendez-vous:</strong>
                                 <?php echo $row['date']; ?></p>
+                                <p><i class="fas fa-map-marker-alt me-2"></i><strong>A domicile:</strong>
+                                <?php echo $row['is_domicile'] === '1' ? "oui" : "non"; ?></p>
                         </div>
 
                         <div class="description-section">
@@ -177,13 +179,13 @@
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="resultHeading">
                                                 <button class="accordion-button collapsed bg-primary" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#resultCollapse" aria-expanded="false"
-                                                    aria-controls="resultCollapse">
+                                                    data-bs-toggle="collapse" data-bs-target="#resultCollapse<?php echo $row['id']?>" aria-expanded="false"
+                                                    aria-controls="resultCollapse<?php echo $row['id']?>">
                                                     View result
                                                 </button>
                                             </h2>
-                                            <div id="resultCollapse" class="accordion-collapse collapse" aria-labelledby="resultHeading"
-                                                data-bs-parent="#resultAccordion">
+                                            <div id="resultCollapse<?php echo $row['id']?>" class="accordion-collapse collapse" aria-labelledby="resultHeading"
+                                                data-bs-parent="#resultAccordion<?php echo $row['id']?>">
                                                 <div class="accordion-body">
                                                     <p><?php echo $row_result['resultat']; ?></p>
                                                     <!-- Print button -->
@@ -233,12 +235,12 @@
                         <div class="mb-4">
                             <span class="input-group-text">Résultat à domicile</span>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="domicile" id="domicileYes"
-                                    value="yes">
+                                <input class="form-check-input" type="radio" name="domicile" id="domicileYes" 
+                                    value="1">
                                 <label class="form-check-label" for="domicileYes">Oui</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="nodomicile" id="domicileNo" value="no"
+                                <input class="form-check-input" type="radio" name="domicile" id="domicileNo" value="0"
                                     checked>
                                 <label class="form-check-label" for="domicileNo">Non</label>
                             </div>

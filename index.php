@@ -31,7 +31,7 @@
             $sql_rdv = "INSERT INTO `randezvous` (`user_id`,`labo_id`,`status`,`date`, `description`, `is_domicile`) VALUES ('$userId', '$laboId', '$status', '$date', '$details', '$domicile')";
             $result_rdv = $conn->query($sql_rdv);
 
-            if ($result_rdv == TRUE && $_SESSION['http://localhost/lab/type'] == '0') {
+            if ($result_rdv == TRUE) {
                 $rdvId = $conn->insert_id;
                 foreach($selectedTests as $test_id) {
                     if($test_id !="other"){
@@ -163,7 +163,7 @@
                                                                 value="<?php echo $filter_id ?>">
                                                             <div class="modal-body">
                                                                 <div class="input-group mb-4">
-                                                                    <select class="form-select" id="testType" name="testType">
+                                                                    <select class="form-select" id="testType" name="testType[]" multiple>
                                                                         <?php
                                                                         $sql_modal = "SELECT * FROM `testtype` WHERE id_labo = '$filter_id' ";
                                                                         $result_modal = $conn->query($sql_modal);
@@ -195,11 +195,11 @@
                                                                 <div class="input-group mb-4">
                                                                     <span class="input-group-text">Résultat à domicile</span>
                                                                     <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="domicile" id="domicileYes" value="1">
+                                                                        <input class="form-check-input ms-4" type="radio" name="domicile" id="domicileYes" value="1">
                                                                         <label class="form-check-label" for="domicileYes">Oui</label>
                                                                     </div>
                                                                     <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="domicile" id="domicileNo" value="O" checked>
+                                                                        <input class="form-check-input ms-4" type="radio" name="domicile" id="domicileNo" value="0" checked>
                                                                         <label class="form-check-label" for="domicileNo">Non</label>
                                                                     </div>
                                                                 </div>
@@ -233,7 +233,7 @@
                         }
                     }
                 } else {
-                    $sql = "SELECT * FROM `laboratoire` WHERE `is_paid` = '0'";
+                    $sql = "SELECT * FROM `laboratoire` WHERE `is_paid` = '1'";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         // output data of each row
