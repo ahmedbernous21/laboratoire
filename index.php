@@ -116,8 +116,8 @@
                                             <p><strong>Emplacement: </strong><span><?php echo $items['emplacement']; ?></span></p>
                                             <p><strong>Horaires: </strong><span><?php echo $items['horaires']; ?></span></p>
                                         </div>
-                                        <div class="accordion mt-2 mb-4" id="testAccordion">
-                                            <?php
+                                        <button class="btn btn-primary mb-3" id="toggleTestsBtn">See Tests</button>
+                                        <div class="accordion mt-2 mb-4" id="testAccordion" style="display: none;">                                            <?php
                                             $filter_id = $items['laboID'];
                                             $sql_display = "SELECT * FROM `testtype` WHERE id_labo = '$filter_id' ";
                                             $result_test = $conn->query($sql_display);
@@ -258,38 +258,39 @@
                                             <p><strong>Emplacement: </strong><span><?php echo $row['emplacement']; ?></span></p>
                                             <p><strong>Horaires: </strong><span><?php echo $row['horaires']; ?></span></p>
                                         </div>
-                                        <div class="accordion mt-2 mb-4" id="testAccordion">
+                                        <button class="btn btn-primary mb-3" data-bs-toggle="collapse" data-bs-target="#testAccordion<?php echo $laboId; ?>" aria-expanded="false" aria-controls="testAccordion<?php echo $laboId; ?>">See Tests</button>
+                                        <div class="accordion mt-2 mb-4 collapse" id="testAccordion<?php echo $laboId; ?>" aria-labelledby="head<?php echo $laboId; ?>">
                                             <?php
-                                            $sql_display = "SELECT * FROM `testtype` WHERE id_labo = '$laboId' ";
+                                            $sql_display = "SELECT * FROM `testtype` WHERE id_labo = '$laboId'";
                                             $result_test = $conn->query($sql_display);
                                             if ($result_test->num_rows > 0) {
                                                 while ($row = $result_test->fetch_assoc()) {
-
+                                                    $testId = $row['id'];
                                                     ?>
                                                     <div class="accordion-item">
-                                                        <h2 class="accordion-header" id="heading<?php echo $row['id'] ?>">
-                                                            <button class="accordion-button collapsed" type="button"
-                                                                data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $row['id'] ?>"
-                                                                aria-expanded="false" aria-controls="collapse<?php echo $row['id'] ?>">
-                                                                <?php echo $row['testName'] ?>
+                                                        <h2 class="accordion-header" id="heading<?php echo $testId; ?>">
+                                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $testId; ?>" aria-expanded="false" aria-controls="collapse<?php echo $testId; ?>">
+                                                                <?php echo $row['testName']; ?>
                                                             </button>
                                                         </h2>
-                                                        <div id="collapse<?php echo $row['id'] ?>" class="accordion-collapse collapse"
-                                                            aria-labelledby="heading<?php echo $row['id'] ?>"
-                                                            data-bs-parent="#testAccordion">
+                                                        <div id="collapse<?php echo $testId; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $testId; ?>" data-bs-parent="#testAccordion<?php echo $laboId; ?>">
                                                             <div class="accordion-body">
-                                                                <p><strong>Détails:</strong> <?php echo $row['details'] ?></p>
-                                                                <p><strong>Prix:</strong> <?php echo $row['price'] ?></p>
-                                                                <p><strong>Délai:</strong> <?php echo $row['delay'] ?></p>
-
+                                                                <p><strong>Détails:</strong> <?php echo $row['details']; ?></p>
+                                                                <p><strong>Prix:</strong> <?php echo $row['price']; ?></p>
+                                                                <p><strong>Délai:</strong> <?php echo $row['delay']; ?></p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <?php
                                                 }
+                                            } else {
+                                            ?>
+                                            <p>il n'y a pas des tests</p>
+                                            <?php
                                             }
                                             ?>
                                         </div>
+
                                         <div class="d-block">
                                             <div class="modal fade" id="exampleModal<?php echo $laboId ?>" tabindex="-1"
                                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -353,7 +354,7 @@
                                                                     data-bs-dismiss="modal">Fermer</button>
                                                                 <button type="submit" class="btn btn-primary" value="Enregistrer"
                                                                     name="sendRDV">Enregistrer</button>
-                                                            </div>
+                                              p           </div>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -406,6 +407,16 @@
 
     </section>
     <script>
+        document.getElementById('toggleTestsBtn').addEventListener('click', function() {
+            var testAccordion = document.getElementById('testAccordion');
+            if (testAccordion.style.display === 'none') {
+                testAccordion.style.display = 'block';
+                this.textContent = 'Hide Tests';
+            } else {
+                testAccordion.style.display = 'none';
+                this.textContent = 'See Tests';
+            }
+        });
         $(document).ready(function () {
             $(".open-rdv").on("click", function () {
                 var laboID = $(this).data("labo-id");
