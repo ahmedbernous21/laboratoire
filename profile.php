@@ -34,10 +34,22 @@
             $phone = $labo_row['phone'];
             $horaires = $labo_row['horaires'];
             $tarifs = $labo_row['tarif'];
+            $is_paid = $labo_row['is_paid'];
+            $payment_date = $labo_row['payment_day'];
+            $recu = $labo_row['recu'];
          } else {
             $labo_name = "Unknown Lab";
          }
-          $sql_tarif = 
+         echo $is_paid;
+         $paymentDateTime = new DateTime($payment_date);
+         $currentDateTime = new DateTime();
+         $interval = $currentDateTime->diff($paymentDateTime);
+         if ($interval->days >= 30 && $currentDateTime >= $paymentDateTime) {
+            $sql_paid = "UPDATE laboratoire SET `is_paid` = '0',`recu` = NULL WHERE `id` = $labo_id";
+            $result_paid = $conn->query($sql_paid);
+            echo "expired";
+         }
+         $sql_tarif =
             "UPDATE laboratoire l 
             JOIN (
                 SELECT 
@@ -60,11 +72,11 @@
             ) AS results ON l.id = results.labo_id
             SET l.tarif = results.total_amount_to_pay;
         ";
-        if ($conn->query($sql_tarif) === TRUE) {
-         echo "Tarif updated successfully.";
-      } else {
+         if ($conn->query($sql_tarif) === TRUE) {
+            echo "Tarif updated successfully.";
+         } else {
             echo "Error updating tarif: " . $conn->error;
-      }
+         }
       } else {
          header("Location: login.php");
          exit;
@@ -111,6 +123,11 @@
             echo "connection failed";
          }
       }
+      if(isset($_POST['renouvler'])){
+         $imageData = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+         $sql_image = "UPDATE laboratoire SET `recu` = '$imageData' WHERE `id` = $labo_id";
+         $result_renouvler = $conn->query($sql_image);
+      }
    } else {
       header("Location: login.php");
       exit;
@@ -134,11 +151,49 @@
                         <p><strong>Emplacement: </strong> <span><?php echo $emplacement ?></span></p>
                         <p><strong>Horaires: </strong> <span><?php echo $horaires ?></span></p>
                      </div>
+                     <?php
+                     // Assume $is_paid is a variable that indicates if the payment is made (1) or not (0)
+                     $is_paid = $labo_row['is_paid']; // Example value from database
+                     
+                     // Determine the message and color based on the payment status
+                     $message = "";
+                     $color = "";
+
+                     switch ($is_paid) {
+                        case 1:
+                           $message = "Payé";
+                           $color = "green";
+                           break;
+                        default:
+                           $message = "Impayé";
+                           $color = "red";
+                           break;
+                     }
+                     ?>
+
+                     <div class="mb-2 pb-2">
+                        <p class="fs-4" style="color: <?php echo $color; ?>;"><b><?php echo $message; ?></b></p>
+                        <?php if (!$is_paid && !isset($recu)) {
+                           ?>
+                           <form action="" method="post" enctype="multipart/form-data">
+                              <p class="payment-info">Payez ici <strong>00XXXXXXXXXX</strong> une somme de <strong>2000
+                                    DA</strong> avec les frais de <strong><?php echo $tarifs; ?> DA</strong> pour activer
+                                 votre compte.</p>
+                              <p class="details">Reçu de votre paiement</p>
+
+                              <div class="input-group mb-3">
+                                 <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+                              </div>
+                              <button class="btn btn-danger" name="renouvler"> Renouveler l'abonnement</button>
+                           </form>
+                           <?php
+                        } ?>
+                     </div>
                      <div class="mb-4">
                         <h4>Tests</h4>
                         <button type="button" class="btn btn-warning btn-sm mt-2 mb-3" data-bs-toggle="modal"
                            data-bs-target="#exampleModal">
-                           <i class="fas fa-plus"></i>  Ajouter un test
+                           <i class="fas fa-plus"></i> Ajouter un test
                         </button>
                         <div class="accordion mt-2" id="testAccordion">
                            <?php

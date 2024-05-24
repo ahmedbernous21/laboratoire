@@ -214,7 +214,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> 
                                         <div class="info">
                                             <?php if (isset($_SESSION['name']) && $_SESSION['is_admin'] == '0') {
                                                 ?>
@@ -354,7 +354,7 @@
                                                                     data-bs-dismiss="modal">Fermer</button>
                                                                 <button type="submit" class="btn btn-primary" value="Enregistrer"
                                                                     name="sendRDV">Enregistrer</button>
-                                              p           </div>
+                                                         </div>
                                                         </form>
                                                     </div>
                                                 </div>
