@@ -82,10 +82,10 @@
          if ($result->num_rows > 0) {
             if (isset($_POST['sendResult'])) {
                $rdvId = $_POST['rdvId'];
-               $results = $_POST['result'];
+               $imageData = addslashes(file_get_contents($_FILES['image']['tmp_name']));
 
                $insert_sql = "INSERT INTO `result` (`id_patient`, `id_labo`, `id_rdv`, `resultat`, `date_resultat`) 
-                                   SELECT r.user_id, u.id_labo, r.id, '$results', NOW() 
+                                   SELECT r.user_id, u.id_labo, r.id, '$imageData', NOW() 
                                    FROM randezvous r
                                    INNER JOIN users u ON r.labo_id = u.id_labo
                                    WHERE r.id = $rdvId";
@@ -191,12 +191,14 @@
                <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">Envoyer les résultats</h5>
                </div>
-               <form action="" method="post">
+               <form action="" method="post" enctype="multipart/form-data">
                   <input type="hidden" name="rdvId" id="rdvId_result">
                   <div class="modal-body">
                      <div class="input-group mb-4">
-                        <span class="input-group-text" id="">résultat</span>
-                        <textarea class="form-control" id="result" rows="3" name="result"></textarea>
+                        <div class="input-group mb-3">
+                           <span class="input-group-text">résultat</span>
+                           <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+                        </div>
                      </div>
                   </div>
                   <div class="modal-footer">

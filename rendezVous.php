@@ -121,7 +121,7 @@
                         <div class="date-section">
                             <p><i class="fas fa-calendar-alt me-2"></i><strong>La date du Rendez-vous:</strong>
                                 <?php echo $row['date']; ?></p>
-                                <p><i class="fas fa-map-marker-alt me-2"></i><strong>A domicile:</strong>
+                            <p><i class="fas fa-map-marker-alt me-2"></i><strong>A domicile:</strong>
                                 <?php echo $row['is_domicile'] === '1' ? "oui" : "non"; ?></p>
                         </div>
 
@@ -179,22 +179,22 @@
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="resultHeading">
                                                 <button class="accordion-button collapsed bg-primary" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#resultCollapse<?php echo $row['id']?>" aria-expanded="false"
-                                                    aria-controls="resultCollapse<?php echo $row['id']?>">
+                                                    data-bs-toggle="collapse" data-bs-target="#resultCollapse<?php echo $row['id']; ?>"
+                                                    aria-expanded="false" aria-controls="resultCollapse<?php echo $row['id']; ?>">
                                                     View result
                                                 </button>
                                             </h2>
-                                            <div id="resultCollapse<?php echo $row['id']?>" class="accordion-collapse collapse" aria-labelledby="resultHeading"
-                                                data-bs-parent="#resultAccordion<?php echo $row['id']?>">
+                                            <div id="resultCollapse<?php echo $row['id']; ?>" class="accordion-collapse collapse"
+                                                aria-labelledby="resultHeading"
+                                                data-bs-parent="#resultAccordion<?php echo $row['id']; ?>">
                                                 <div class="accordion-body">
-                                                    <p><?php echo $row_result['resultat']; ?></p>
-                                                    <!-- Print button -->
-                                                    <button class="btn btn-secondary print-btn"
-                                                        data-result="<?php echo $row_result['resultat']; ?>">Print Result</button>
+                                                    <!-- Download button -->
+                                                    <a href="data:image/jpeg;base64,<?php echo base64_encode($row_result['resultat']); ?>" download="payment_receipt.jpg" class="btn btn-secondary">Imprimer le résultat</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                                 <?php
                             }
@@ -235,8 +235,7 @@
                         <div class="mb-4">
                             <span class="input-group-text">Résultat à domicile</span>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="domicile" id="domicileYes" 
-                                    value="1">
+                                <input class="form-check-input" type="radio" name="domicile" id="domicileYes" value="1">
                                 <label class="form-check-label" for="domicileYes">Oui</label>
                             </div>
                             <div class="form-check">
