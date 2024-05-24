@@ -32,7 +32,7 @@
    }
    if (isset($_POST['removeSubs'])) {
       $labo_id = $_POST['laboid'];
-      $sql_rdv = "UPDATE `laboratoire` SET `is_paid` = '0', `payment_day` = NULL WHERE `id` = $labo_id";
+      $sql_rdv = "UPDATE `laboratoire` SET `is_paid` = '0', `payment_day` = NULL, `recu` = NULL WHERE `id` = $labo_id";
       $result = $conn->query($sql_rdv);
 
       if ($result == TRUE) {
